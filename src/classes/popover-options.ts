@@ -4,7 +4,7 @@ import { Placement } from 'tippy.js';
  * The options to personalize the popover
  *
  * placement: the position of the popover. Accepted values are:
- * 'top' | 'bottom' | 'left' | 'right'
+ * 'auto' | 'top' | 'bottom' | 'left' | 'right'
  * | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'
  * | 'left-start' | 'left-end' | 'right-start' | 'right-end';
  * hideOnClick: If true, any click in the document will close the popover
