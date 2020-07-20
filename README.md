@@ -7,8 +7,7 @@ A lightweight javascript edc popover for displaying the contextual help, based o
 
 _This project is meant to be used with **easy doc contents** (aka edc)._
 
-edc is a simple yet powerful tool for agile-like documentation
-management.
+edc is a simple yet powerful tool for agile-like documentation management.
 
 Learn more at [https://www.easydoccontents.com](https://www.easydoccontents.com).
 
