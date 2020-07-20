@@ -91,7 +91,7 @@ Available options are :
 | interactive | `boolean` | Determine if we can interact with the popover content | `true` |
 | trigger | `string` | Event that will trigger the opening of the popover | `click` |
 | customClass | `string` | class name that will be added to the main popover container | undefined |
-| appendTo | `string` or `Element` | Event that will trigger the opening of the popover | `click` |
+| appendTo | `parent | Element | (() => Element)` | Element that will receive the popover | `(() => documentation.body)` |
 
 ## Tests
 
