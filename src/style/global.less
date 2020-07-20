@@ -1,0 +1,121 @@
+@import 'variables';
+
+.edc-popover-container {
+  background-color: @edc-bg-color;
+  border: 1px solid @edc-main;
+  color: @edc-font-color;
+  min-width: 150px;
+  line-height: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+    font-family: @edc-title-font;
+    margin: 0;
+  }
+
+  /* Header */
+
+  .edc-popover-header {
+    border-bottom: 3px solid @edc-main;
+    padding: 8px 14px;
+    margin: 0;
+
+    .edc-popover-title {
+      font-weight: 700;
+      font-size: 14px;
+    }
+  }
+
+  /* Body: Description + sections */
+
+  .edc-popover-body {
+    max-width: 276px;
+    padding: 9px 14px;
+    font-family: @edc-font-families;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.42857143; // For a 20px line height with a 14px font size
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    word-spacing: normal;
+  }
+
+  /* Description */
+
+  .edc-popover-desc {
+    font-size: 14px;
+    padding-bottom: 10px;
+  }
+
+  /* Sections - articles and links */
+
+  .edc-popover-section-item {
+    font-size: 15px;
+  }
+
+  .edc-popover-section-title {
+    strong {
+      font-size: 13px;
+      font-weight: bold;
+    }
+  }
+
+  .edc-popover-need-more, .edc-popover-related-topics {
+    list-style-type: disc;
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  .edc-popover-section-item .edc-popover-section-goto {
+    cursor: pointer;
+    color: @edc-url-color;
+    text-decoration: underline;
+  }
+
+}
+
+/* tippy.js style overrides */
+.tippy-box {
+  background-color: unset;
+  border: 0;
+  border-radius: 0;
+  max-width: none;
+}
+
+.tippy-content {
+  padding: 0;
+}
+
+/* Popover Arrow */
+.tippy-arrow {
+  color: @edc-main;
+}
+
+.tippy-box[data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: @edc-main;
+}
+
+.tippy-box[data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: @edc-main;
+}
+
+.tippy-box[data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: @edc-main;
+}
+
+.tippy-box[data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: @edc-main;
+}
+
+/* Outlined box style on focus */
+div[data-tippy-root], .tippy-box, .tippy-content :focus {
+  outline: transparent 1px;
+}
