@@ -1,6 +1,6 @@
 {
   "name": "edc-popover-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Light weight javascript popover for edc",
   "main": "dist/edc-popover.js",
   "scripts": {
