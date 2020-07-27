@@ -1,6 +1,6 @@
 import { PopoverContent } from './popover-content';
-import { PopoverOptions } from './popover-options';
 import { PopoverLabels } from './popover-labels';
+import { IPopoverOptions } from './popover-options.interface';
 
 /**
  * Configuration for the popover, passed as an input from the host element
@@ -16,5 +16,5 @@ export class PopoverConfig {
     icon: string;
     content: PopoverContent;
     labels: PopoverLabels;
-    options?: PopoverOptions;
+    options?: IPopoverOptions;
 }
