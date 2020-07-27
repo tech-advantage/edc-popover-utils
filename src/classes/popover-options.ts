@@ -1,4 +1,5 @@
 import { Placement } from 'tippy.js';
+import { IPopoverOptions } from './popover-options.interface';
 
 /**
  * The options to personalize the popover
@@ -15,20 +16,12 @@ import { Placement } from 'tippy.js';
  * appendTo: the element to which the popover will be append
  *
  */
-export interface PopoverOptions {
-    placement?: Placement;
-    hideOnClick?: boolean;
-    interactive?: boolean;
-    trigger?: string;
+export class PopoverOptions implements IPopoverOptions {
+    placement: Placement = 'bottom';
+    hideOnClick = true;
+    interactive = true;
+    trigger = 'click';
     customClass?: string;
     theme?: string;
-    appendTo?: 'parent' | Element | (() => Element);
+    appendTo: 'parent' | Element | (() => Element) = () => document.body;
 }
-
-export const DEFAULT_OPTIONS: PopoverOptions = {
-    placement: 'bottom',
-    hideOnClick: true,
-    interactive: true,
-    trigger: 'click',
-    appendTo: () => document.body
-};
