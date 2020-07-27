@@ -1,9 +1,8 @@
 import tippy, { Instance } from 'tippy.js';
 
-import { PopoverConfig } from './classes/popover-config';
+import { PopoverConfig, PopoverOptions } from './classes';
 import { TemplateHelper } from './helpers/template.helper';
 import { ConfigHelper } from './helpers/config.helper';
-import { PopoverOptions } from './classes/popover-options';
 
 export class Popover {
     instance: Instance;
