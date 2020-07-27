@@ -1,8 +1,8 @@
-import { PopoverItem } from '../classes/popover-item';
+import { PopoverItem } from '../classes';
 import { ConfigHelper } from './config.helper';
 import { ClassNames, ElementOptions, TagNames } from '../constants/template.constants';
-import { PopoverContent } from '../classes/popover-content';
-import { PopoverConfig, PopoverLabels, PopoverOptions } from '../classes';
+import { PopoverContent } from '../classes';
+import { IPopoverOptions, PopoverConfig, PopoverLabels } from '../classes';
 
 export class TemplateHelper {
 
@@ -38,7 +38,7 @@ export class TemplateHelper {
     /**
      * Builds the main container, with its className
      */
-    private static buildContainer(options: PopoverOptions): HTMLDivElement {
+    private static buildContainer(options: IPopoverOptions): HTMLDivElement {
         const container = document.createElement(TagNames.DIV);
         container.classList.add(ClassNames.EDC_POPOVER_CONTAINER);
         if (options && options.customClass) {

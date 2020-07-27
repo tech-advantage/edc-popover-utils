@@ -49,7 +49,7 @@ export class PopoverConfig {
     icon: string;
     content: PopoverContent;
     labels: PopoverLabels;
-    options?: PopoverOptions;
+    options?: IPopoverOptions;
 }
 ```
 
