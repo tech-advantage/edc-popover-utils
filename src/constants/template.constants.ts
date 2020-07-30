@@ -31,3 +31,7 @@ export enum ElementOptions {
     WINDOW_OPEN_TARGET = 'help',
     WINDOW_OPEN_FEATURES = 'scrollbars=1,resizable=1,height=800,width=1200',
 }
+
+export enum Theme {
+    EDC_DARK = 'edcDark'
+}

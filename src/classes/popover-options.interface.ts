@@ -11,6 +11,7 @@ export interface IPopoverOptions {
     interactive?: boolean;
     trigger?: string;
     customClass?: string;
+    dark?: boolean;
     theme?: string;
     appendTo?: 'parent' | Element | (() => Element);
 }

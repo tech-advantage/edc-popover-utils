@@ -12,6 +12,7 @@ import { IPopoverOptions } from './popover-options.interface';
  * interactive: Determine if we can interact with the popover content
  * trigger: which event will trigger the opening of the popover
  * customClass: class name that will be added to the main popover container
+ * dark: applies popover's dark style
  * theme: the name of the theme to use for this popover
  * appendTo: the element to which the popover will be append
  *
@@ -22,6 +23,7 @@ export class PopoverOptions implements IPopoverOptions {
     interactive = true;
     trigger = 'click';
     customClass?: string;
+    dark?: boolean;
     theme?: string;
     appendTo: 'parent' | Element | (() => Element) = () => document.body;
 }
