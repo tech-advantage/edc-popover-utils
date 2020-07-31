@@ -94,6 +94,14 @@ Available options are :
 | appendTo | `parent | Element | (() => Element)` | Element that will receive the popover | `(() => documentation.body)` |
 | dark | `boolean` | Use a dark preset theme for the popover  | `false` |
 
+### Customization
+
+You can customize the popover with CSS classes as described below :
+
+![CSS Classes](./CSSClasses.png)
+
+When a the dark mode is enabled, an HTML attribute `data-theme` is set to `edcDark`.
+
 ## Tests
 
 ### Unit
