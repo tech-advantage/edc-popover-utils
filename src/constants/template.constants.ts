@@ -3,7 +3,6 @@ export enum TagNames {
     BODY = 'body',
     DIV = 'div',
     SPAN = 'span',
-    STRONG = 'strong',
     UL = 'ul',
     LI = 'li',
     H3 = 'h3',
