@@ -35,7 +35,7 @@ describe('Template Helper test', () => {
                     <article class="edc-popover-desc">${config.content.description}</article>
                     <div class="edc-popover-section">
                         <div>
-                            <h6 class="edc-popover-section-title"><strong><span>${config.labels.articles}</span></strong></h6>
+                            <h6 class="edc-popover-section-title"><span>${config.labels.articles}</span></h6>
                             <ul class="edc-popover-need-more">
                                 <li class="edc-popover-section-item">
                                     <div class="edc-popover-section-goto">${config.content.articles[0].label}</div>
@@ -46,7 +46,7 @@ describe('Template Helper test', () => {
                             </ul>
                         </div>
                         <div>
-                            <h6 class="edc-popover-section-title"><strong><span>${config.labels.links}</span></strong></h6>
+                            <h6 class="edc-popover-section-title"><span>${config.labels.links}</span></h6>
                             <ul class="edc-popover-related-topics">
                                 <li class="edc-popover-section-item">
                                     <div class="edc-popover-section-goto">${config.content.links[0].label}</div>
@@ -90,7 +90,7 @@ describe('Template Helper test', () => {
                     <article class="edc-popover-desc">${config.content.description}</article>
                     <div class="edc-popover-section">
                         <div>
-                            <h6 class="edc-popover-section-title"><strong><span>${config.labels.links}</span></strong></h6>
+                            <h6 class="edc-popover-section-title"><span>${config.labels.links}</span></h6>
                             <ul class="edc-popover-related-topics">
                                 <li class="edc-popover-section-item">
                                     <div class="edc-popover-section-goto">${config.content.links[0].label}</div>
@@ -122,7 +122,7 @@ describe('Template Helper test', () => {
                     <article class="edc-popover-desc">${config.content.description}</article>
                     <div class="edc-popover-section">
                         <div>
-                            <h6 class="edc-popover-section-title"><strong><span>${config.labels.articles}</span></strong></h6>
+                            <h6 class="edc-popover-section-title"><span>${config.labels.articles}</span></h6>
                             <ul class="edc-popover-need-more">
                                 <li class="edc-popover-section-item">
                                     <div class="edc-popover-section-goto">${config.content.articles[0].label}</div>
@@ -175,7 +175,7 @@ describe('Template Helper test', () => {
                  <div class="edc-popover-body edc-popover-content">
                     <div class="edc-popover-section">
                         <div>
-                            <h6 class="edc-popover-section-title"><strong><span>${config.labels.articles}</span></strong></h6>
+                            <h6 class="edc-popover-section-title"><span>${config.labels.articles}</span></h6>
                             <ul class="edc-popover-need-more">
                                 <li class="edc-popover-section-item">
                                     <div class="edc-popover-section-goto">${config.content.articles[0].label}</div>
@@ -186,7 +186,7 @@ describe('Template Helper test', () => {
                             </ul>
                         </div>
                         <div>
-                            <h6 class="edc-popover-section-title"><strong><span>${config.labels.links}</span></strong></h6>
+                            <h6 class="edc-popover-section-title"><span>${config.labels.links}</span></h6>
                             <ul class="edc-popover-related-topics">
                                 <li class="edc-popover-section-item">
                                     <div class="edc-popover-section-goto">${config.content.links[0].label}</div>
@@ -219,7 +219,7 @@ describe('Template Helper test', () => {
                     <article class="edc-popover-desc">${config.content.description}</article>
                     <div class="edc-popover-section">
                         <div>
-                            <h6 class="edc-popover-section-title"><strong><span>${config.labels.articles}</span></strong></h6>
+                            <h6 class="edc-popover-section-title"><span>${config.labels.articles}</span></h6>
                             <ul class="edc-popover-need-more">
                                 <li class="edc-popover-section-item">
                                     <div class="edc-popover-section-goto">${config.content.articles[0].label}</div>
@@ -230,7 +230,7 @@ describe('Template Helper test', () => {
                             </ul>
                         </div>
                         <div>
-                            <h6 class="edc-popover-section-title"><strong><span>${config.labels.links}</span></strong></h6>
+                            <h6 class="edc-popover-section-title"><span>${config.labels.links}</span></h6>
                             <ul class="edc-popover-related-topics">
                                 <li class="edc-popover-section-item">
                                     <div class="edc-popover-section-goto">${config.content.links[0].label}</div>

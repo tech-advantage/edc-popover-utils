@@ -149,11 +149,9 @@ export class TemplateHelper {
             return null;
         }
         const title = document.createElement(TagNames.H6);
-        const strong = document.createElement(TagNames.STRONG);
         const titleText = document.createElement(TagNames.SPAN);
         titleText.innerText = label;
-        strong.appendChild(titleText);
-        title.appendChild(strong);
+        title.appendChild(titleText);
 
         return title;
     }

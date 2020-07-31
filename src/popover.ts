@@ -1,8 +1,9 @@
 import tippy, { Instance } from 'tippy.js';
 
-import { PopoverConfig, PopoverOptions } from './classes';
+import { PopoverConfig } from './classes';
 import { TemplateHelper } from './helpers/template.helper';
 import { ConfigHelper } from './helpers/config.helper';
+import { PopoverProps } from './classes/popover-props';
 
 export class Popover {
     instance: Instance;
@@ -17,14 +18,13 @@ export class Popover {
     initPopover(config: PopoverConfig): void {
         const content: HTMLDivElement = TemplateHelper.buildTemplate(config);
 
-        // Override default options with the ones passed as input
-        const options: PopoverOptions = Object.assign(new PopoverOptions(), config.options);
+        const props: PopoverProps = {
+            content,
+            ...ConfigHelper.mapOptionsToProps(config.options)
+        };
 
         // Create the popover instance
-        this.instance = tippy(config.target, {
-            content,
-            ...options
-        });
+        this.instance = tippy(config.target, props);
     }
 
 }

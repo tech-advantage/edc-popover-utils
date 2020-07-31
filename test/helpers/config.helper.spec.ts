@@ -1,7 +1,9 @@
 import { PopoverConfig } from '../../src/classes/popover-config';
 import { ConfigHelper } from '../../src/helpers/config.helper';
-import { PopoverContent } from '../../src/classes';
+import { PopoverContent, PopoverOptions } from '../../src/classes';
 import { DEFAULT_LABELS } from '../../src/constants/default-labels';
+import { PopoverProps } from '../../src/classes/popover-props';
+import { Theme } from '../../src/constants/template.constants';
 
 describe('Configuration Helper Test', () => {
     let config: PopoverConfig;
@@ -85,4 +87,79 @@ describe('Configuration Helper Test', () => {
             expect(hasBody).toBeFalse();
         });
     });
+
+    describe('mapOptionsToProps', () => {
+        let options: PopoverOptions;
+        beforeEach(() => {
+            options = new PopoverOptions();
+        });
+        it('should return props attributes', () => {
+            // Given we have options with custom values
+            options.customClass = 'customClass';
+            options.placement = 'top';
+            options.trigger = 'mouseenter';
+            options.interactive = false;
+            options.hideOnClick = false;
+            options.appendTo = 'parent';
+
+            // When calling mapOptionsToProps
+            const props: PopoverProps = ConfigHelper.mapOptionsToProps(options);
+
+            const expectedProps: PopoverProps = new PopoverProps();
+            expectedProps.placement = 'top';
+            expectedProps.trigger = 'mouseenter';
+            expectedProps.interactive = false;
+            expectedProps.hideOnClick = false;
+            expectedProps.appendTo = 'parent';
+
+            // We should have the associated values
+            expect(props).toEqual(expectedProps);
+            // Others properties should not have been copied
+            expect((props as any)['customClass']).toBeUndefined();
+            expect((props as any)['dark']).toBeUndefined();
+        });
+
+        it('should return theme edcDark if dark is true', () => {
+            // Given dark option is true
+            options.dark = true;
+            options.theme = 'customTheme';
+
+            // When calling mapOptionsToProps
+            const props: PopoverProps = ConfigHelper.mapOptionsToProps(options);
+            const expectedProps: PopoverProps = new PopoverProps();
+            expectedProps.theme = Theme.EDC_DARK;
+            expectedProps.appendTo = options.appendTo;
+
+            // We should have the associated values, ignoring the option's theme attribute
+            expect(props).toEqual(expectedProps);
+            expect((props as any)['dark']).toBeUndefined();
+        });
+
+        it('should return customTheme if dark is false', () => {
+            // Given dark option is true
+            options.dark = false;
+            options.theme = 'customTheme';
+
+            // When calling mapOptionsToProps
+            const props: PopoverProps = ConfigHelper.mapOptionsToProps(options);
+            const expectedProps: PopoverProps = new PopoverProps();
+            expectedProps.appendTo = options.appendTo;
+            expectedProps.theme = 'customTheme';
+
+            // We should have the associated values, ignoring the option's theme attribute
+            expect(props).toEqual(expectedProps);
+            expect((props as any)['dark']).toBeUndefined();
+        });
+
+        it('should return default value when options are not defined', () => {
+            // Given we pass null or undefined as options
+            const optionNull: PopoverOptions = null;
+            // When calling mapOptionsToProps
+            const props1: PopoverProps = ConfigHelper.mapOptionsToProps(optionNull);
+            const props2: PopoverProps = ConfigHelper.mapOptionsToProps(undefined);
+
+            expect(JSON.stringify(props1)).toEqual(JSON.stringify(new PopoverProps()));
+            expect(JSON.stringify(props2)).toEqual(JSON.stringify(new PopoverProps()));
+        });
+    })
 });
