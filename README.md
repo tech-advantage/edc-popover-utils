@@ -92,6 +92,7 @@ Available options are :
 | trigger | `string` | Event that will trigger the opening of the popover | `click` |
 | customClass | `string` | class name that will be added to the main popover container | undefined |
 | appendTo | `parent | Element | (() => Element)` | Element that will receive the popover | `(() => documentation.body)` |
+| dark | `boolean` | Use a dark preset theme for the popover  | `false` |
 
 ## Tests
 
