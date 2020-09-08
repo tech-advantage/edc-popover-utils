@@ -4,11 +4,38 @@ import { DEFAULT_LABELS } from '../constants/default-labels';
 import { PopoverProps } from '../classes/popover-props';
 import { IPopoverOptions, PopoverOptions } from '../classes';
 import { Theme } from '../constants/template.constants';
+import { TemplateHelper } from './template.helper';
+import { TargetEventHandler } from '../classes/target-event-handler';
 
 export class ConfigHelper {
 
     /**
-     * Verify the given configuration, return true if valid else false
+     * Builds the tippy.js popover props from the configuration
+     *
+     * @param config the popover configuration
+     * @param targetHandler the popover target (icon) handler
+     */
+    static buildPropsFromConfig(config: PopoverConfig, targetHandler: TargetEventHandler): PopoverProps {
+        if (!ConfigHelper.checkConfig(config)) {
+            return null;
+        }
+        const content: HTMLDivElement = TemplateHelper.buildTemplate(config, targetHandler);
+
+        if (!content) {
+            return null;
+        }
+        const props: PopoverProps = {
+            content,
+            ...ConfigHelper.mapOptionsToProps(config.options)
+        };
+        return props;
+    }
+
+    /**
+     * Returns true if configuration is valid
+     *
+     * Checks configuration, target,
+     * and sets default labels if they're not defined
      *
      * @param config the input configuration
      */
@@ -29,7 +56,7 @@ export class ConfigHelper {
     }
 
     /**
-     * Build a popover props object from the provided options
+     * Builds a popover props object from the provided options
      *
      * @param options the provided options
      */
@@ -37,11 +64,19 @@ export class ConfigHelper {
         const src = options || new PopoverOptions();
         // If dark is selected, force EDC_DARK theme, else use provided theme if present
         const theme = src.dark ? Theme.EDC_DARK : src.theme;
-        return new PopoverProps(src.placement, src.hideOnClick, src.interactive, src.trigger, src.appendTo, theme);
+        return new PopoverProps(
+            src.placement,
+            src.hideOnClick,
+            src.interactive,
+            src.trigger,
+            src.appendTo,
+            theme,
+            src.delay,
+            src.animation);
     }
 
     /**
-     * Return true if any content was found
+     * Returns true if any content was found
      *
      * content can be description, articles or links
      *
@@ -54,8 +89,8 @@ export class ConfigHelper {
     }
 
     /**
-     * Return true if content as any description
-     * empty description (white spaces only) will be considered negative
+     * Returns true if content has any description
+     * empty descriptions (white spaces only) will return false
      *
      * @param content the given content to check
      */
@@ -64,7 +99,7 @@ export class ConfigHelper {
     }
 
     /**
-     * Return true if content has at least one article
+     * Returns true if content has at least one article
      *
      * @param content the given content to check
      */
@@ -73,7 +108,7 @@ export class ConfigHelper {
     }
 
     /**
-     * Return true if content has at least one link
+     * Returns true if content has at least one link
      *
      * @param content the given content to check
      */

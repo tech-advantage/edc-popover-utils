@@ -1,6 +1,6 @@
 import { PopoverConfig } from '../../src/classes/popover-config';
 import { ConfigHelper } from '../../src/helpers/config.helper';
-import { PopoverContent, PopoverOptions } from '../../src/classes';
+import { IPopoverOptions, PopoverContent, PopoverOptions } from '../../src/classes';
 import { DEFAULT_LABELS } from '../../src/constants/default-labels';
 import { PopoverProps } from '../../src/classes/popover-props';
 import { Theme } from '../../src/constants/template.constants';
@@ -160,6 +160,37 @@ describe('Configuration Helper Test', () => {
 
             expect(JSON.stringify(props1)).toEqual(JSON.stringify(new PopoverProps()));
             expect(JSON.stringify(props2)).toEqual(JSON.stringify(new PopoverProps()));
+        });
+        it('should replace with default value when properties are not defined', () => {
+            // Given we have a partially defined options object
+            const partialOptions: IPopoverOptions = {
+                customClass: 'myClass'
+            };
+
+            // When calling mapOptionsToProps
+            const props1: PopoverProps = ConfigHelper.mapOptionsToProps(partialOptions);
+
+            // Then default values should have been set with default values
+            expect(props1.trigger).toBeTruthy();
+            expect(props1.placement).toEqual('bottom');
+            expect(typeof props1.appendTo).toEqual('function');
+            expect(props1.hideOnClick).toBeTruthy();
+            expect(props1.interactive).toBeTruthy();
+            // Theme is undefined by default
+            expect(props1.theme).toBeUndefined();
+
+        });
+        it('should override defaults with parameter values', () => {
+            // Given we have a partially defined options object
+            const partialOptions: IPopoverOptions = {
+                trigger: 'notDefault'
+            };
+
+            // When calling mapOptionsToProps
+            const props1: PopoverProps = ConfigHelper.mapOptionsToProps(partialOptions);
+
+            // Then we should receive the specified option value
+            expect(props1.trigger).toEqual('notDefault');
         });
     })
 });
