@@ -89,10 +89,19 @@ Available options are :
 | placement | popper.js `Placement` | The popover placement | `bottom` |
 | hideOnClick | `boolean` | If true, any click in the document will close the popover | `true` |
 | interactive | `boolean` | Determine if we can interact with the popover content | `true` |
-| trigger | `string` | Event that will trigger the opening of the popover | `click` |
+| trigger | `string` | Event that will trigger the popover: `click` `mouseenter` `focus` | `click` |
 | customClass | `string` | class name that will be added to the main popover container | undefined |
-| appendTo | `parent | Element | (() => Element)` | Element that will receive the popover | `(() => documentation.body)` |
-| dark | `boolean` | Use a dark preset theme for the popover  | `false` |
+| dark | `boolean` | Dark mode | `false` |
+| theme | `string` | Popover's theme name | `undefined` |
+| displaySeparator | `boolean` | Show / Hide the line between header and body | `true` |
+| displayTitle | `boolean` | Show / Hide the header containing the title - if false, will hide the separator | `true` |
+| displayArticles | `boolean` | Show / Hide the articles section | `true` |
+| displayRelatedTopics | `boolean` | Show / Hide the related Topics (aka Links) section | `true` |
+| displayTooltip | `boolean` | Show / Hide the icon tooltip | `true` |
+| displayPopover | `boolean` | If false, clicking on the icon will open the web help viewer on the first article, instead of showing the popover | `true` |
+| delay | `number | [number, number]` | Delay in milliseconds before showing the popover - if array, delay for opening and closing respectively | `undefined` |
+| animation | `Animation` | Adds a animation when opening / closing the popover | `0` |
+| appendTo | `parent | Element | (() => Element)` | The element to which append the popover to | `(() => documentation.body)` |
 
 ### Customization
 

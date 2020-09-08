@@ -1,30 +1,54 @@
 import tippy, { Instance } from 'tippy.js';
 
 import { PopoverConfig } from './classes';
-import { TemplateHelper } from './helpers/template.helper';
 import { ConfigHelper } from './helpers/config.helper';
 import { PopoverProps } from './classes/popover-props';
+import { TargetEventHandler } from './classes/target-event-handler';
 
 export class Popover {
     instance: Instance;
+    eventHandler: TargetEventHandler;
     
-    constructor(public config: PopoverConfig) {
-        if (!ConfigHelper.checkConfig(config)) {
-            return null;
-        }
-        this.initPopover(config);
+    constructor(config?: PopoverConfig) {
+        this.instance = null;
+        this.buildPopover(config);
     }
 
-    initPopover(config: PopoverConfig): void {
-        const content: HTMLDivElement = TemplateHelper.buildTemplate(config);
+    /**
+     * Creates the popover properties from the input configuration object and the tippy.js instance
+     * @param config the received popover configuration
+     */
+    buildPopover(config: PopoverConfig): Instance {
+        if (!config) {
+            return null;
+        }
+        if (!this.eventHandler) {
+            // Create the event handler, to handle custom target events listeners
+            this.eventHandler = new TargetEventHandler(config.target);
+        }
+        const props: PopoverProps = ConfigHelper.buildPropsFromConfig(config, this.eventHandler);
+        if (!props) {
+            this.removeExistingPopover();
+            return null;
+        }
+        if (this.instance) {
+            // Update using existing instance
+            this.instance.setProps(props);
+        } else {
+            // Create the popover instance
+            this.instance = tippy(config.target, props);
+        }
+        return this.instance;
+    }
 
-        const props: PopoverProps = {
-            content,
-            ...ConfigHelper.mapOptionsToProps(config.options)
-        };
+    removeExistingPopover(): void {
+        if (this.instance && typeof this.instance.destroy === 'function') {
+            this.instance.unmount();
+            this.instance.destroy();
+            this.instance = null;
 
-        // Create the popover instance
-        this.instance = tippy(config.target, props);
+            this.eventHandler = null;
+        }
     }
 
 }

@@ -19,13 +19,15 @@
   /* Header */
 
   .edc-popover-header {
-    border-bottom: 3px solid @edc-main;
     padding: 8px 14px;
     margin: 0;
 
     .edc-popover-title {
       font-weight: 700;
       font-size: 14px;
+    }
+    &.edc-popover-separator {
+      border-bottom: 3px solid @edc-main;
     }
   }
 
@@ -52,10 +54,12 @@
 
   .edc-popover-desc {
     font-size: 14px;
-    padding-bottom: 10px;
   }
 
   /* Sections - articles and links */
+  .edc-popover-section {
+    padding-top: 10px;
+  }
 
   .edc-popover-section-item {
     font-size: 15px;
