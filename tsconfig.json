@@ -8,6 +8,7 @@
     "allowJs": true,
     "sourceMap": true,
     "esModuleInterop": true,
+    "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["es2015","dom"]
   },
