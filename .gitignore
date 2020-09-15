@@ -14,7 +14,7 @@
 *.launch
 .settings/
 *.sublime-workspace
-edc-popover-js.iml
+edc-popover-utils.iml
 
 # IDE - VSCode
 .vscode/*
