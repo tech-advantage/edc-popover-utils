@@ -13,7 +13,7 @@ module.exports = {
     output: {
         path: path.resolve('./dist'),
         filename: 'index.js',
-        library: 'edc-popover',
+        library: 'edc-popover-utils',
         libraryTarget: 'umd'
     },
     module: {

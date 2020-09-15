@@ -1,7 +1,7 @@
-## edc-popover-js
+## edc-popover-utils
 
-[![Build Status](https://travis-ci.org/tech-advantage/edc-popover-js.svg?branch=master)](https://travis-ci.org/tech-advantage/edc-popover-js)
-[![npm version](https://badge.fury.io/js/edc-popover-js.svg)](https://badge.fury.io/js/edc-popover-js)
+[![Build Status](https://travis-ci.org/tech-advantage/edc-popover-utils.svg?branch=master)](https://travis-ci.org/tech-advantage/edc-popover-utils)
+[![npm version](https://badge.fury.io/js/edc-popover-utils.svg)](https://badge.fury.io/js/edc-popover-utils)
 
 A lightweight javascript edc popover for displaying the contextual help, based only on [tippy.js](https://atomiks.github.io/tippyjs/).
 
@@ -21,12 +21,12 @@ No extra dependency to install.
 
 You can import this module with `npm` by running:
 ```bash
-npm install edc-popover-js --save
+npm install edc-popover-utils --save
 ```
 
 Or with `yarn`:
 ```bash
-yarn add edc-popover-js
+yarn add edc-popover-utils
 ```
 
 ### Setup
