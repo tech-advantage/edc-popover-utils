@@ -1,5 +1,5 @@
-import { Placement } from 'tippy.js';
 import { Animation } from './animation';
+import { PopoverPlacement } from './popover-placement';
 
 /**
  * Input props to instantiate the tippy.js popover
@@ -8,7 +8,7 @@ import { Animation } from './animation';
 export class PopoverProps {
 
     content?: HTMLDivElement;
-    constructor(public placement: Placement = 'bottom',
+    constructor(public placement: PopoverPlacement = PopoverPlacement.BOTTOM,
                 public hideOnClick  = true,
                 public interactive  = true,
                 public trigger = 'click',

@@ -1,6 +1,6 @@
-import { Placement } from 'tippy.js';
 import { IPopoverOptions } from './popover-options.interface';
 import { Animation } from './animation';
+import { PopoverPlacement } from './popover-placement';
 
 /**
  * The options to personalize the popover
@@ -13,7 +13,6 @@ import { Animation } from './animation';
  * interactive: Determine if we can interact with the popover content
  * trigger: Event that will trigger the popover: `click`, `mouseenter`, `focus`
  * customClass: class name that will be added to the main popover container
- * dark: Dark mode
  * theme: Popover's theme name
  * displaySeparator: Hide / show the line between header and body
  * displayTitle: Hide / show the header containing the title - if false, will hide the separator
@@ -26,12 +25,11 @@ import { Animation } from './animation';
  * appendTo: The element to which append the popover to
  */
 export class PopoverOptions implements IPopoverOptions {
-    placement: Placement = 'bottom';
+    placement: PopoverPlacement = PopoverPlacement.BOTTOM;
     hideOnClick = true;
     interactive = true;
     trigger = 'click';
     customClass?: string;
-    dark = false;
     theme?: string;
     displaySeparator = true;
     displayTitle = true;

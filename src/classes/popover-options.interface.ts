@@ -1,5 +1,5 @@
-import { Placement } from 'tippy.js';
 import { Animation } from './animation';
+import { PopoverPlacement } from './popover-placement';
 
 /**
  * The options to personalize the popover via an interface
@@ -7,12 +7,11 @@ import { Animation } from './animation';
  *
  */
 export interface IPopoverOptions {
-    placement?: Placement;
+    placement?: PopoverPlacement;
     hideOnClick?: boolean;
     interactive?: boolean;
     trigger?: string;
     customClass?: string;
-    dark?: boolean;
     theme?: string;
     appendTo?: 'parent' | Element | (() => Element);
     displaySeparator?: boolean;

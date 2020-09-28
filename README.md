@@ -86,12 +86,11 @@ const myPopoverInstance = new Popover(popoverConfig);
 Available options are :
 | Property | Type | Description | Default |
 |---|---|---|---|
-| placement | popper.js `Placement` | The popover placement | `bottom` |
+| placement | popper.js `PopoverPlacement` | The popover placement | `bottom` |
 | hideOnClick | `boolean` | If true, any click in the document will close the popover | `true` |
 | interactive | `boolean` | Determine if we can interact with the popover content | `true` |
 | trigger | `string` | Event that will trigger the popover: `click` `mouseenter` `focus` | `click` |
 | customClass | `string` | class name that will be added to the main popover container | undefined |
-| dark | `boolean` | Dark mode | `false` |
 | theme | `string` | Popover's theme name | `undefined` |
 | displaySeparator | `boolean` | Show / Hide the line between header and body | `true` |
 | displayTitle | `boolean` | Show / Hide the header containing the title - if false, will hide the separator | `true` |
@@ -108,8 +107,6 @@ Available options are :
 You can customize the popover with CSS classes as described below :
 
 ![CSS Classes](./CSSClasses.png)
-
-When dark mode is enabled, an HTML attribute `data-theme` set to `edcDark` is applied on the `.tippy-box` div.
 
 ## Tests
 

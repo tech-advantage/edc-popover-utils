@@ -3,7 +3,6 @@ import { PopoverContent } from '../classes/popover-content';
 import { DEFAULT_LABELS } from '../constants/default-labels';
 import { PopoverProps } from '../classes/popover-props';
 import { IPopoverOptions, PopoverOptions } from '../classes';
-import { Theme } from '../constants/template.constants';
 import { TemplateHelper } from './template.helper';
 import { TargetEventHandler } from '../classes/target-event-handler';
 
@@ -62,15 +61,13 @@ export class ConfigHelper {
      */
     static mapOptionsToProps(options: IPopoverOptions): PopoverProps {
         const src = options || new PopoverOptions();
-        // If dark is selected, force EDC_DARK theme, else use provided theme if present
-        const theme = src.dark ? Theme.EDC_DARK : src.theme;
         return new PopoverProps(
             src.placement,
             src.hideOnClick,
             src.interactive,
             src.trigger,
             src.appendTo,
-            theme,
+            src.theme,
             src.delay,
             src.animation);
     }
