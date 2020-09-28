@@ -41,9 +41,5 @@ export enum EventType {
     CLICK = 'click'
 }
 
-export enum Theme {
-    EDC_DARK = 'edcDark'
-}
-
 export const ICON_TARGET_NULL_MESSAGE = 'Could not create the popover: The icon target is not defined';
 export const ICON_TARGET_WRONG_TYPE = 'Could not create the popover: the target must be of type Element';
