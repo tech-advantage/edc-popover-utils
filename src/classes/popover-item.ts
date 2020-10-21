@@ -5,6 +5,7 @@
  *
  */
 export class PopoverItem {
+    public id?: number;
     constructor(public label: string, public url: string) {
     }
 }

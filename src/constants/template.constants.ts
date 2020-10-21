@@ -13,6 +13,7 @@ export enum TagNames {
 export enum ClassNames {
     EDC_POPOVER_CONTAINER = 'edc-popover-container',
     EDC_POPOVER_HEADER = 'edc-popover-header',
+    EDC_POPOVER_SEPARATOR = 'edc-popover-separator',
     EDC_POPOVER_CONTENT = 'edc-popover-content',
     EDC_POPOVER_BODY = 'edc-popover-body',
     EDC_POPOVER_SECTION = 'edc-popover-section',
@@ -26,11 +27,19 @@ export enum ClassNames {
 }
 
 // Attribute options
+export enum AttributeNames {
+    TITLE = 'title',
+    DATA_URL = 'data-url'
+}
+
 export enum ElementOptions {
     WINDOW_OPEN_TARGET = 'help',
     WINDOW_OPEN_FEATURES = 'scrollbars=1,resizable=1,height=800,width=1200',
 }
 
-export enum Theme {
-    EDC_DARK = 'edcDark'
+export enum EventType {
+    CLICK = 'click'
 }
+
+export const ICON_TARGET_NULL_MESSAGE = 'Could not create the popover: The icon target is not defined';
+export const ICON_TARGET_WRONG_TYPE = 'Could not create the popover: the target must be of type Element';
