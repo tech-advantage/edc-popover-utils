@@ -27,7 +27,7 @@ export class TemplateHelper {
      * @param config the popover configuration
      * @param targetHandler popover event handler, to track the event listeners on the target element (for the displayPopover option)
      */
-    static buildTemplate(config: PopoverConfig, targetHandler: TargetEventHandler): HTMLDivElement {
+    static buildTemplate(config: PopoverConfig, targetHandler: TargetEventHandler | null): HTMLDivElement | null {
         if (!config || !TemplateHelper.checkTarget(targetHandler)) {
             return null;
         }
@@ -62,7 +62,7 @@ export class TemplateHelper {
      *
      * @param targetHandler the target event handler
      */
-    static checkTarget(targetHandler: TargetEventHandler): boolean {
+    static checkTarget(targetHandler: TargetEventHandler | null): boolean {
         if (!targetHandler) {
             return false;
         }
@@ -96,7 +96,7 @@ export class TemplateHelper {
      * @param content the content including the title
      * @param options the options for the popover
      */
-    private static buildHeader(content: PopoverContent, options: IPopoverOptions): HTMLDivElement {
+    private static buildHeader(content: PopoverContent | null, options: IPopoverOptions | null): HTMLDivElement | null {
         if (!options || !options.displayTitle) {
             return null;
         }
@@ -127,17 +127,17 @@ export class TemplateHelper {
      * @param labels the popover labels
      * @param options the popover options
      */
-    private static buildBody(content: PopoverContent, labels: PopoverLabels, options: IPopoverOptions): HTMLDivElement {
+    private static buildBody(content: PopoverContent | null, labels: PopoverLabels | null, options: IPopoverOptions): HTMLDivElement {
         const popoverBody = document.createElement(TagNames.DIV);
         // Body container
         popoverBody.classList.add(ClassNames.EDC_POPOVER_BODY, ClassNames.EDC_POPOVER_CONTENT);
         if (!ConfigHelper.hasContent(content)) {
             // Use coming soon message if no body content was found
-            popoverBody.innerText = labels.comingSoon;
+            popoverBody.innerText = labels?.comingSoon ?? '';
             return popoverBody;
         }
         // Add Description
-        if (content.description) {
+        if (content?.description) {
             const description = document.createElement(TagNames.ARTICLE);
             description.innerText = content.description;
             description.classList.add(ClassNames.EDC_POPOVER_DESC);
@@ -158,7 +158,7 @@ export class TemplateHelper {
      * @param options popover options
      * @private
      */
-    private static createSection(content: PopoverContent, labels: PopoverLabels, options: IPopoverOptions): HTMLDivElement {
+    private static createSection(content: PopoverContent | null, labels: PopoverLabels | null, options: IPopoverOptions): HTMLDivElement | null {
         if ((!ConfigHelper.hasArticles(content) || !options.displayArticles)
             && (!ConfigHelper.hasLinks(content) || !options.displayRelatedTopics)) {
             return null;
@@ -168,14 +168,16 @@ export class TemplateHelper {
         popoverSection.classList.add(ClassNames.EDC_POPOVER_SECTION);
 
         // Articles
-        const articles: HTMLDivElement = options.displayArticles ?
-            TemplateHelper.buildSectionList(content.articles, labels.articles, ClassNames.NEED_MORE) : null;
+        const articleSrc: PopoverItem[] = content?.articles ?? [];
+        const articles: HTMLDivElement | null = options.displayArticles ?
+            TemplateHelper.buildSectionList(articleSrc, labels?.articles, ClassNames.NEED_MORE) : null;
         if (articles) {
             popoverSection.appendChild(articles);
         }
         // Links
-        const links: HTMLDivElement = options.displayRelatedTopics ?
-            TemplateHelper.buildSectionList(content.links, labels.links, ClassNames.RELATED_TOPIC) : null;
+        const linkSrc: PopoverItem[] = content?.links ?? [];
+        const links: HTMLDivElement | null = options.displayRelatedTopics ?
+            TemplateHelper.buildSectionList(linkSrc, labels?.links, ClassNames.RELATED_TOPIC) : null;
         if (links) {
             popoverSection.appendChild(links);
         }
@@ -189,9 +191,9 @@ export class TemplateHelper {
      * @param label the string to add at the top of the list section
      * @param className the name of the item list class (specific to articles or links)
      */
-    private static buildSectionList(items: PopoverItem[], label: string, className: string): HTMLDivElement {
+    private static buildSectionList(items: PopoverItem[], label: string | null | undefined, className: string | null | undefined): HTMLDivElement | null {
         if (!items || !items.length) {
-            return;
+            return null;
         }
         const container = document.createElement(TagNames.DIV);
         // Add the label presenting the list
@@ -202,7 +204,9 @@ export class TemplateHelper {
         }
 
         const list = document.createElement(TagNames.UL);
-        list.classList.add(className);
+        if (className) {
+            list.classList.add(className);
+        }
         items.forEach((currentValue: PopoverItem) => {
             const li = TemplateHelper.createItem(currentValue);
             if (li) {
@@ -218,7 +222,7 @@ export class TemplateHelper {
      *
      * @param label the string to use for the label
      */
-    private static createSectionLabel(label: string): HTMLDivElement {
+    private static createSectionLabel(label: string | null | undefined): HTMLDivElement | null {
         if (!label || !label.trim()) {
             return null;
         }
@@ -243,10 +247,12 @@ export class TemplateHelper {
         li.classList.add(ClassNames.SECTION_ITEM);
         const link = document.createElement(TagNames.DIV);
         link.classList.add(ClassNames.SECTION_GOTO);
-        link.innerText = item.label;
+        link.innerText = item.label ?? '';
         // Add the open action on click to redirect to the web explorer
         link.onclick = (() => {
-            window.open(item.url, ElementOptions.WINDOW_OPEN_TARGET, ElementOptions.WINDOW_OPEN_FEATURES);
+            if (item && item.url) {
+                window.open(item.url, ElementOptions.WINDOW_OPEN_TARGET, ElementOptions.WINDOW_OPEN_FEATURES);
+            }
         });
         li.appendChild(link);
         return li;
@@ -264,8 +270,14 @@ export class TemplateHelper {
      * @param options the popover options
      * @param labels the popover labels
      */
-    private static addIconOptions(eventHandler: TargetEventHandler, content: PopoverContent, options: IPopoverOptions, labels: PopoverLabels): void {
-        if (options.displayTooltip && labels && labels.iconAlt) {
+    private static addIconOptions(eventHandler: TargetEventHandler | null,
+                                  content: PopoverContent | null,
+                                  options: IPopoverOptions | null,
+                                  labels: PopoverLabels | null): void {
+        if (!eventHandler) {
+            return;
+        }
+        if (options?.displayTooltip && labels?.iconAlt) {
             eventHandler.target.setAttribute(AttributeNames.TITLE, labels.iconAlt);
         } else {
             // Remove if previously set
@@ -273,12 +285,12 @@ export class TemplateHelper {
         }
         // Handle the click on the icon, based on displayPopover option value
         let articleUrl = '';
-        if (ConfigHelper.hasArticles(content)) {
+        if (content && ConfigHelper.hasArticles(content)) {
             // Use the first article as entry point for edc help viewer
-            articleUrl = content.articles[0].url;
+            articleUrl = content.articles[0].url ?? '';
         }
 
         // The event handler will add or remove the event listener, based on display popover option and url value
-        eventHandler.updateClickHandler(options.displayPopover, articleUrl);
+        eventHandler.updateClickHandler(!!options?.displayPopover, articleUrl);
     }
 }

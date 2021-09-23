@@ -13,8 +13,8 @@ import { PopoverOptions } from './popover-options';
  * options: Popover customizations
  */
 export class PopoverConfig {
-    target: SingleTarget;
-    content: PopoverContent;
-    labels: PopoverLabels;
-    options: IPopoverOptions = new PopoverOptions();
+    target: SingleTarget | null = null;
+    content: PopoverContent | null = null;
+    labels: PopoverLabels | null = null;
+    options: IPopoverOptions | null | undefined = new PopoverOptions();
 }

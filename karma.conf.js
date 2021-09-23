@@ -5,13 +5,12 @@ module.exports = function(config) {
     config.set({
         basePath: '',
         frameworks: ['jasmine'],
-        files: ['test/**/*.ts', 'test/**/*.js'],
+        files: ['test/**/*.ts'],
         exclude: [],
 
         // Available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
             'test/**/*.ts': ['webpack'],
-            'test/**/*.js': ['webpack'],
         },
         webpack: {
             module: webpackConfig.module,

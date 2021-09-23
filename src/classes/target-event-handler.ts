@@ -23,7 +23,7 @@ export class TargetEventHandler {
      * @param displayPopover state of displayPopover option: if false, open the help viewer, if true, display the popover
      * @param url the first article url, entry point for the help viewer application
      */
-    updateClickHandler(displayPopover: boolean, url: string): void {
+    updateClickHandler(displayPopover: boolean, url: string | null | undefined): void {
         if (!this.target) {
             return;
         }
@@ -61,7 +61,7 @@ export class TargetEventHandler {
  *
  * @param e the click event
  */
-function clickHandler(e: Event) {
+function clickHandler(this: Element, e: Event): void {
     // Will be called within target element scope, "this" will refer to the dom element itself
     const articleUrl = this.getAttribute(AttributeNames.DATA_URL); // Help viewer's url has been stored as a data-property
     if (!articleUrl) {
