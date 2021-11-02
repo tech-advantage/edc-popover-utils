@@ -11,8 +11,8 @@ import { PopoverItem } from './popover-item';
  */
 export class PopoverContent {
 
-    constructor(public title = '',
-                public description = '',
+    constructor(public title: string | null = '',
+                public description: string | null = '',
                 public articles: PopoverItem[] = [],
                 public links: PopoverItem[] = []) {
     }

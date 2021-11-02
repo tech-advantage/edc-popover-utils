@@ -7,8 +7,8 @@
  * comingSoon: the message to be displayed if no content was found
  */
 export class PopoverLabels {
-    articles?: string;
-    links?: string;
-    iconAlt?: string;
-    comingSoon?: string;
+    articles?: string | null = '';
+    links?: string | null = '';
+    iconAlt?: string | null = '';
+    comingSoon?: string | null = '';
 }

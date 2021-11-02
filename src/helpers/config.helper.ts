@@ -14,20 +14,19 @@ export class ConfigHelper {
      * @param config the popover configuration
      * @param targetHandler the popover target (icon) handler
      */
-    static buildPropsFromConfig(config: PopoverConfig, targetHandler: TargetEventHandler): PopoverProps {
+    static buildPropsFromConfig(config: PopoverConfig, targetHandler: TargetEventHandler | null): PopoverProps | null {
         if (!ConfigHelper.checkConfig(config)) {
             return null;
         }
-        const content: HTMLDivElement = TemplateHelper.buildTemplate(config, targetHandler);
+        const content: HTMLDivElement | null = TemplateHelper.buildTemplate(config, targetHandler);
 
         if (!content) {
             return null;
         }
-        const props: PopoverProps = {
+        return {
             content,
             ...ConfigHelper.mapOptionsToProps(config.options)
         };
-        return props;
     }
 
     /**
@@ -59,7 +58,7 @@ export class ConfigHelper {
      *
      * @param options the provided options
      */
-    static mapOptionsToProps(options: IPopoverOptions): PopoverProps {
+    static mapOptionsToProps(options: IPopoverOptions | null | undefined): PopoverProps {
         const src = options || new PopoverOptions();
         return new PopoverProps(
             src.placement,
@@ -79,7 +78,7 @@ export class ConfigHelper {
      *
      * @param content the given content to check
      */
-    static hasContent(content: PopoverContent): boolean {
+    static hasContent(content: PopoverContent | null): boolean {
         return ConfigHelper.hasDescription(content) ||
             ConfigHelper.hasArticles(content) ||
             ConfigHelper.hasLinks(content);
@@ -91,8 +90,8 @@ export class ConfigHelper {
      *
      * @param content the given content to check
      */
-    static hasDescription(content: PopoverContent): boolean {
-        return content && !!content.description && !!content.description.trim();
+    static hasDescription(content: PopoverContent | null): boolean {
+        return !!content?.description && !!content.description.trim();
     }
 
     /**
@@ -100,8 +99,8 @@ export class ConfigHelper {
      *
      * @param content the given content to check
      */
-    static hasArticles(content: PopoverContent): boolean {
-        return !!content && !!content.articles && content.articles.length > 0;
+    static hasArticles(content: PopoverContent | null): boolean {
+        return !!content?.articles && content.articles.length > 0;
     }
 
     /**
@@ -109,7 +108,7 @@ export class ConfigHelper {
      *
      * @param content the given content to check
      */
-    static hasLinks(content: PopoverContent) {
-        return !!content && !!content.links && content.links.length > 0;
+    static hasLinks(content: PopoverContent | null): boolean {
+        return !!content?.links && content.links.length > 0;
     }
 }

@@ -6,8 +6,8 @@ import { PopoverProps } from './classes/popover-props';
 import { TargetEventHandler } from './classes/target-event-handler';
 
 export class Popover {
-    instance: Instance;
-    eventHandler: TargetEventHandler;
+    instance: Instance | null;
+    eventHandler: TargetEventHandler | null = null;
     
     constructor(config?: PopoverConfig) {
         this.instance = null;
@@ -18,15 +18,15 @@ export class Popover {
      * Creates the popover properties from the input configuration object and the tippy.js instance
      * @param config the received popover configuration
      */
-    buildPopover(config: PopoverConfig): Instance {
-        if (!config) {
+    buildPopover(config: PopoverConfig | null | undefined): Instance | null {
+        if (!config || !config.target) {
             return null;
         }
         if (!this.eventHandler) {
             // Create the event handler, to handle custom target events listeners
             this.eventHandler = new TargetEventHandler(config.target);
         }
-        const props: PopoverProps = ConfigHelper.buildPropsFromConfig(config, this.eventHandler);
+        const props: PopoverProps | null = ConfigHelper.buildPropsFromConfig(config, this.eventHandler);
         if (!props) {
             this.removeExistingPopover();
             return null;

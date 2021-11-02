@@ -22,21 +22,21 @@ describe('Template Helper test', () => {
 
     beforeEach(() => {
         iconTarget = document.createElement('span');
-        config = Object.assign(new PopoverConfig(), {
-            target: iconTarget,
-            content: Object.assign(new PopoverContent(), {
-                title: 'Popover de test',
-                description: 'Description du popover de test',
-                articles: [{ label: 'How to', url: 'url1' }, { label: 'Example', url: 'url2' }],
-                links: [{ label: 'Link 1', url: '' }, { label: 'Link 2', url: '' }]
-            }),
-            options: new PopoverOptions(),
-            labels: DEFAULT_LABELS
-        });
+        config = new PopoverConfig();
+        config.target = iconTarget;
+        config.content = new PopoverContent(
+            'Popover de test',
+            'Description du popover de test',
+            [{ label: 'How to', url: 'url1' }, { label: 'Example', url: 'url2' }],
+            [{ label: 'Link 1', url: '' }, { label: 'Link 2', url: '' }]
+        );
+        config.options = new PopoverOptions();
+        config.labels = DEFAULT_LABELS;
+
         eventsHandler = new TargetEventHandler(config.target);
         // Generate contents
         headerContent =
-            `<div class="edc-popover-header edc-popover-separator">
+        `<div class="edc-popover-header edc-popover-separator">
             <h3 class="edc-popover-title">${config.content.title}</h3>
         </div>`;
         descriptionContent = `
@@ -86,11 +86,11 @@ describe('Template Helper test', () => {
                 // Given the popover configuration contains title and all the body elements
 
                 // When building the template for this config
-                const content: HTMLDivElement = TemplateHelper.buildTemplate(config, eventsHandler);
+                const content: HTMLDivElement | null = TemplateHelper.buildTemplate(config, eventsHandler);
 
                 // Then it should have the expected content
-                const expectedContent = fullContent;
-                expect(compareStringContent(content.innerHTML, expectedContent)).toBeTruthy();
+                expect(content).toBeDefined();
+                expect(compareStringContent(content.innerHTML, fullContent)).toBeTruthy();
             });
 
             it('should return the empty message if no content', () => {
@@ -98,19 +98,20 @@ describe('Template Helper test', () => {
                 config.content = null;
 
                 // When building the popover template
-                const content: HTMLDivElement = TemplateHelper.buildTemplate(config, eventsHandler);
+                const content: HTMLDivElement | null  = TemplateHelper.buildTemplate(config, eventsHandler);
 
                 // Then it should contain a div with the coming soon message label
+                expect(content).toBeDefined();
                 const expectedContent = `<div class="edc-popover-body edc-popover-content">${config.labels.comingSoon}</div>`;
                 expect(content.innerHTML).toEqual(expectedContent);
             });
 
             it('should return the description and links if articles are empty', () => {
                 // Given config has no articles
-                config.content.articles = null;
+                config.content.articles = [];
 
                 // When building the popover template
-                const content: HTMLDivElement = TemplateHelper.buildTemplate(config, eventsHandler);
+                const content: HTMLDivElement | null = TemplateHelper.buildTemplate(config, eventsHandler);
 
                 // Then it should have the expected content with no articles
                 const expectedContent =
@@ -138,11 +139,14 @@ describe('Template Helper test', () => {
             });
 
             it('should return the description and articles if links are empty', () => {
+                if (!config || !config.content || !config.labels) {
+                    return;
+                }
                 // Given config has no articles
-                config.content.links = null;
+                config.content.links = [];
 
                 // When building the popover template
-                const content: HTMLDivElement = TemplateHelper.buildTemplate(config, eventsHandler);
+                const content: HTMLDivElement | null = TemplateHelper.buildTemplate(config, eventsHandler);
 
                 // Then it should have the expected content with no links
                 const expectedContent =
@@ -171,11 +175,11 @@ describe('Template Helper test', () => {
 
             it('should return the description only if articles and links are empty', () => {
                 // Given config has no articles and no links
-                config.content.articles = null;
-                config.content.links = null;
+                config.content.articles = [];
+                config.content.links = [];
 
                 // When building the popover template
-                const content: HTMLDivElement = TemplateHelper.buildTemplate(config, eventsHandler);
+                const content: HTMLDivElement | null = TemplateHelper.buildTemplate(config, eventsHandler);
 
                 // Then it should have the expected content with no links
                 const expectedContent =
@@ -194,7 +198,7 @@ describe('Template Helper test', () => {
                 config.content.description = null;
 
                 // When building the popover template
-                const content: HTMLDivElement = TemplateHelper.buildTemplate(config, eventsHandler);
+                const content: HTMLDivElement | null = TemplateHelper.buildTemplate(config, eventsHandler);
 
                 // Then it should have the expected content with no article description element
                 const expectedContent =
@@ -456,6 +460,7 @@ describe('Template Helper test', () => {
 
                 // When building the respective popover templates
                 const template = TemplateHelper.buildTemplate(config, eventsHandler);
+                expect(template).toBeDefined();
 
                 // Then there should be articles
                 const articlesContainer = template.getElementsByClassName(ClassNames.NEED_MORE);
@@ -472,6 +477,7 @@ describe('Template Helper test', () => {
 
                 // When building the respective popover templates
                 const template = TemplateHelper.buildTemplate(config, eventsHandler);
+                expect(template).toBeDefined();
 
                 // Then there should be NO articles
                 const articlesContainer = template.getElementsByClassName(ClassNames.NEED_MORE);
@@ -488,6 +494,7 @@ describe('Template Helper test', () => {
 
                 // When building the respective popover templates
                 const template = TemplateHelper.buildTemplate(config, eventsHandler);
+                expect(template).toBeDefined();
 
                 // Then there should be links
                 const linksContainer = template.getElementsByClassName(ClassNames.RELATED_TOPIC);
@@ -505,6 +512,7 @@ describe('Template Helper test', () => {
                 // When building the respective popover templates
                 const template = TemplateHelper.buildTemplate(config, eventsHandler);
 
+                expect(template).toBeDefined();
                 // Then there should be NO links
                 const linksContainer = template.getElementsByClassName(ClassNames.RELATED_TOPIC);
                 expect(linksContainer.length).toEqual(0);
